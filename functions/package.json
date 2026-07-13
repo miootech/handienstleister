@@ -1,0 +1,20 @@
+{
+  "name": "han-enterprise-functions",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "engines": {
+    "node": "20"
+  },
+  "scripts": {
+    "lint": "node --check index.js",
+    "serve": "firebase emulators:start --only functions,firestore,storage,auth",
+    "deploy": "firebase deploy --only functions"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.12.1",
+    "firebase-admin": "^12.5.0",
+    "firebase-functions": "^5.1.1",
+    "resend": "^4.0.1"
+  }
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Admin Dashboard - HAN Dienstleister GmbH</title>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-shell">
+  <main class="admin-app">
+    <section class="admin-login" id="loginView">
+      <div class="admin-login__card">
+        <div class="admin-brand">
+          <span>H</span>
+          <div><strong>HAN Dienstleister</strong><small>Admin Dashboard</small></div>
+        </div>
+        <h1>Anmelden</h1>
+        <p>Sicherer Zugriff für Super Admins und Company Admins.</p>
+        <form id="loginForm" novalidate>
+          <div class="form-group"><label for="loginEmail">E-Mail</label><input id="loginEmail" name="email" type="email" class="form-control" autocomplete="email" required></div>
+          <div class="form-group"><label for="loginPassword">Passwort</label><input id="loginPassword" name="password" type="password" class="form-control" autocomplete="current-password" required></div>
+          <button class="btn btn--primary btn--lg" type="submit" style="width:100%;"><i class="fas fa-lock"></i> Einloggen</button>
+          <div class="form-status mt-2" role="status" aria-live="polite"></div>
+        </form>
+      </div>
+    </section>
+
+    <section class="admin-dashboard" id="dashboardView" hidden>
+      <aside class="admin-sidebar">
+        <div class="admin-brand">
+          <span>H</span>
+          <div><strong>HAN Dienstleister</strong><small id="adminRole">Dashboard</small></div>
+        </div>
+        <nav class="admin-nav" aria-label="Admin Navigation">
+          <button class="active" data-admin-tab="overview"><i class="fas fa-chart-line"></i> Dashboard</button>
+          <button data-admin-tab="requests"><i class="fas fa-inbox"></i> Anfragen</button>
+          <button data-admin-tab="reviews"><i class="fas fa-star"></i> Bewertungen</button>
+          <button data-admin-tab="calendar"><i class="fas fa-calendar-check"></i> Kalender</button>
+          <button data-admin-tab="files"><i class="fas fa-folder-open"></i> Dateien</button>
+          <button data-admin-tab="company"><i class="fas fa-building"></i> Unternehmen</button>
+          <button data-admin-tab="users"><i class="fas fa-users-cog"></i> Benutzer</button>
+          <button data-admin-tab="settings"><i class="fas fa-sliders-h"></i> Einstellungen</button>
+          <button data-admin-tab="stats"><i class="fas fa-chart-pie"></i> Statistiken</button>
+        </nav>
+        <button id="logoutButton" class="admin-logout"><i class="fas fa-sign-out-alt"></i> Abmelden</button>
+      </aside>
+
+      <section class="admin-main">
+        <header class="admin-topbar">
+          <div>
+            <p>HAN Dienstleister GmbH</p>
+            <h1 id="adminTitle">Dashboard</h1>
+          </div>
+          <div class="admin-topbar__actions">
+            <button class="theme-switch" aria-label="Farbmodus wechseln"><i class="fas fa-moon"></i></button>
+            <a href="../index.html" class="btn btn--secondary btn--sm"><i class="fas fa-external-link-alt"></i> Website</a>
+          </div>
+        </header>
+
+        <section class="admin-panel active" data-panel="overview">
+          <div class="metric-grid">
+            <article class="metric-card"><span>Neue Anfragen</span><strong id="metricNewRequests">0</strong></article>
+            <article class="metric-card"><span>In Bearbeitung</span><strong id="metricOpenRequests">0</strong></article>
+            <article class="metric-card"><span>Offene Bewertungen</span><strong id="metricPendingReviews">0</strong></article>
+            <article class="metric-card"><span>Durchschnitt</span><strong id="metricAverageRating">0.0</strong></article>
+          </div>
+          <div class="admin-grid-two">
+            <article class="admin-card"><h2>Aktuelle Anfragen</h2><div id="recentRequests" class="admin-list compact-list"></div></article>
+            <article class="admin-card"><h2>Bewertungen zur Prüfung</h2><div id="recentReviews" class="admin-list compact-list"></div></article>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="requests">
+          <div class="admin-card">
+            <div class="admin-card__header">
+              <h2>Anfragen verwalten</h2>
+              <select id="requestStatusFilter" class="form-control admin-filter">
+                <option value="">Alle Status</option>
+                <option value="new">Neu</option>
+                <option value="open">Offen</option>
+                <option value="in_progress">In Bearbeitung</option>
+                <option value="waiting_customer">Warten auf Kunde</option>
+                <option value="accepted">Angenommen</option>
+                <option value="rejected">Abgelehnt</option>
+                <option value="done">Erledigt</option>
+                <option value="archived">Archiviert</option>
+              </select>
+            </div>
+            <div id="requestsList" class="admin-list"></div>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="reviews">
+          <div class="admin-card">
+            <div class="admin-card__header"><h2>Bewertungen moderieren</h2><span class="admin-muted">Freigabe vor Veröffentlichung</span></div>
+            <div id="adminReviewsList" class="admin-list"></div>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="calendar">
+          <div class="admin-card">
+            <h2>Termin bestätigen</h2>
+            <form id="appointmentForm" class="admin-form-grid">
+              <div class="form-group"><label for="appointmentRequest">Anfrage</label><select id="appointmentRequest" name="requestId" class="form-control" required></select></div>
+              <div class="form-group"><label for="appointmentDate">Datum</label><input id="appointmentDate" name="date" type="date" class="form-control" required></div>
+              <div class="form-group"><label for="appointmentTime">Uhrzeit</label><input id="appointmentTime" name="time" type="time" class="form-control" required></div>
+              <div class="form-group"><label for="appointmentDuration">Dauer</label><input id="appointmentDuration" name="durationMinutes" type="number" min="15" step="15" value="60" class="form-control" required></div>
+              <div class="form-group"><label for="appointmentLocation">Ort</label><input id="appointmentLocation" name="location" class="form-control" maxlength="200"></div>
+              <div class="form-group"><label for="appointmentMeetingUrl">Google Meet / Teams</label><input id="appointmentMeetingUrl" name="meetingUrl" type="url" class="form-control" maxlength="300"></div>
+              <div class="form-group"><label for="appointmentContact">Ansprechpartner</label><input id="appointmentContact" name="contactPerson" class="form-control" maxlength="120"></div>
+              <div class="form-group admin-form-grid__full"><label for="appointmentDescription">Beschreibung</label><textarea id="appointmentDescription" name="description" class="form-control" maxlength="1000"></textarea></div>
+              <button type="submit" class="btn btn--primary admin-form-grid__full"><i class="fas fa-calendar-plus"></i> Termin bestätigen und E-Mail senden</button>
+              <div class="form-status admin-form-grid__full" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-panel="files"><div class="admin-card"><h2>Dateien</h2><p class="admin-muted">Uploads werden über Firebase Storage rollenbasiert geschützt. Unternehmensbilder und Review-Anhänge liegen getrennt nach Unternehmen.</p></div></section>
+        <section class="admin-panel" data-panel="company"><div class="admin-card"><h2>Unternehmen</h2><p class="admin-muted">Unternehmensdaten, Logo, Anschrift und Kontaktinformationen können in Firestore unter <code>companies/han-dienstleister</code> gepflegt werden.</p></div></section>
+        <section class="admin-panel" data-panel="users"><div class="admin-card"><h2>Benutzer</h2><p class="admin-muted">Rollen werden über die Cloud Function <code>setUserRole</code> gesetzt. Super Admins können Company Admins anlegen und sperren.</p></div></section>
+        <section class="admin-panel" data-panel="settings"><div class="admin-card"><h2>Einstellungen</h2><p class="admin-muted">Firebase, Resend, Domain, Mail-Absender und Sicherheitslimits werden über Umgebungsvariablen und Firestore-Einstellungen verwaltet.</p></div></section>
+        <section class="admin-panel" data-panel="stats"><div class="admin-card"><h2>Statistiken</h2><div id="statsOutput" class="stats-output"></div></div></section>
+      </section>
+    </section>
+  </main>
+
+  <script type="module" src="admin.js"></script>
+</body>
+</html>

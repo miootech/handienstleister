@@ -1,0 +1,43 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function role() {
+      return signedIn() && request.auth.token.role is string ? request.auth.token.role : "visitor";
+    }
+
+    function isSuperAdmin() {
+      return role() == "superAdmin";
+    }
+
+    function isCompanyAdmin(companyId) {
+      return isSuperAdmin() || (role() == "companyAdmin" && request.auth.token.companyId == companyId);
+    }
+
+    function allowedImage() {
+      return request.resource != null
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches("image/(jpeg|png|webp)");
+    }
+
+    match /companies/{companyId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if isCompanyAdmin(companyId) && allowedImage();
+      allow delete: if isCompanyAdmin(companyId);
+    }
+
+    match /reviews/{companyId}/{allPaths=**} {
+      allow read: if true;
+      allow write: if false;
+      allow delete: if isCompanyAdmin(companyId);
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
