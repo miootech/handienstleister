@@ -55,7 +55,7 @@ function initAdmin() {
   initAppointmentForm();
 
   try {
-    const { auth } = window.__hanFirebaseServices || {};
+    const { auth } = window.__apexFirebaseServices || {};
     const servicesPromise = import("../services/firebaseClient.js").then((module) => module.getFirebaseServices());
     servicesPromise.then(({ auth }) => {
       onAuthStateChanged(auth, handleAuthState);

@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://han-dienstleister.de/sitemap.xml
+Sitemap: https://apex-dienstleister-demo.de/sitemap.xml

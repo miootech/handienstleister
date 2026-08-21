@@ -1,4 +1,4 @@
-# HAN Dienstleister GmbH - Enterprise Website
+# Apex Dienstleister GmbH - Enterprise Website Demo
 
 Produktionsnahe statische Unternehmenswebsite mit Firebase Backend, Admin Dashboard, Kontaktanfragen, Bewertungsfreigabe, Terminbestätigung und Resend E-Mail-Versand.
 

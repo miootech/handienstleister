@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>Admin Dashboard - HAN Dienstleister GmbH</title>
+  <title>Admin Dashboard - Apex Dienstleister GmbH</title>
   <link rel="preconnect" href="https://cdnjs.cloudflare.com">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="../css/style.css">
@@ -15,8 +15,8 @@
     <section class="admin-login" id="loginView">
       <div class="admin-login__card">
         <div class="admin-brand">
-          <span>H</span>
-          <div><strong>HAN Dienstleister</strong><small>Admin Dashboard</small></div>
+          <span>A</span>
+          <div><strong>Apex Dienstleister</strong><small>Admin Dashboard</small></div>
         </div>
         <h1>Anmelden</h1>
         <p>Sicherer Zugriff für Super Admins und Company Admins.</p>
@@ -32,8 +32,8 @@
     <section class="admin-dashboard" id="dashboardView" hidden>
       <aside class="admin-sidebar">
         <div class="admin-brand">
-          <span>H</span>
-          <div><strong>HAN Dienstleister</strong><small id="adminRole">Dashboard</small></div>
+          <span>A</span>
+          <div><strong>Apex Dienstleister</strong><small id="adminRole">Dashboard</small></div>
         </div>
         <nav class="admin-nav" aria-label="Admin Navigation">
           <button class="active" data-admin-tab="overview"><i class="fas fa-chart-line"></i> Dashboard</button>
@@ -52,7 +52,7 @@
       <section class="admin-main">
         <header class="admin-topbar">
           <div>
-            <p>HAN Dienstleister GmbH</p>
+            <p>Apex Dienstleister GmbH</p>
             <h1 id="adminTitle">Dashboard</h1>
           </div>
           <div class="admin-topbar__actions">
@@ -120,7 +120,7 @@
         </section>
 
         <section class="admin-panel" data-panel="files"><div class="admin-card"><h2>Dateien</h2><p class="admin-muted">Uploads werden über Firebase Storage rollenbasiert geschützt. Unternehmensbilder und Review-Anhänge liegen getrennt nach Unternehmen.</p></div></section>
-        <section class="admin-panel" data-panel="company"><div class="admin-card"><h2>Unternehmen</h2><p class="admin-muted">Unternehmensdaten, Logo, Anschrift und Kontaktinformationen können in Firestore unter <code>companies/han-dienstleister</code> gepflegt werden.</p></div></section>
+        <section class="admin-panel" data-panel="company"><div class="admin-card"><h2>Unternehmen</h2><p class="admin-muted">Unternehmensdaten, Logo, Anschrift und Kontaktinformationen können in Firestore unter <code>companies/apex-dienstleister</code> gepflegt werden.</p></div></section>
         <section class="admin-panel" data-panel="users"><div class="admin-card"><h2>Benutzer</h2><p class="admin-muted">Rollen werden über die Cloud Function <code>setUserRole</code> gesetzt. Super Admins können Company Admins anlegen und sperren.</p></div></section>
         <section class="admin-panel" data-panel="settings"><div class="admin-card"><h2>Einstellungen</h2><p class="admin-muted">Firebase, Resend, Domain, Mail-Absender und Sicherheitslimits werden über Umgebungsvariablen und Firestore-Einstellungen verwaltet.</p></div></section>
         <section class="admin-panel" data-panel="stats"><div class="admin-card"><h2>Statistiken</h2><div id="statsOutput" class="stats-output"></div></div></section>

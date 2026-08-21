@@ -1,19 +1,19 @@
 export const firebaseConfig = {
-  apiKey: "AIzaSyB5ACiNipB6JkX02WyGXPDCyiqjEQN54I8",
-  authDomain: "handienstleister.firebaseapp.com",
-  projectId: "handienstleister",
-  storageBucket: "handienstleister.firebasestorage.app",
-  messagingSenderId: "773596379234",
-  appId: "1:773596379234:web:35f764c62c598c00b2793b"
+  apiKey: "YOUR_FIREBASE_API_KEY",
+  authDomain: "apex-dienstleister.firebaseapp.com",
+  projectId: "apex-dienstleister-demo",
+  storageBucket: "apex-dienstleister-demo.firebasestorage.app",
+  messagingSenderId: "123456789012",
+  appId: "1:123456789012:web:demo1234567890abcdef"
 };
 
 export const appConfig = {
-  companyId: "han-dienstleister",
-  companyName: "HAN Dienstleister GmbH",
-  domain: "https://han-dienstleister.de",
+  companyId: "apex-dienstleister",
+  companyName: "Apex Dienstleister GmbH",
+  domain: "https://apex-dienstleister-demo.de",
   functionsRegion: "europe-west3",
-  adminEmail: "info@han-dienstleister.de",
-  superAdminEmail: "admin@han-dienstleister.de",
+  adminEmail: "info@apex-dienstleister.de",
+  superAdminEmail: "admin@apex-dienstleister.de",
   maxContactMessagesPerHour: 3,
   maxReviewSubmissionsPerDay: 2
 };

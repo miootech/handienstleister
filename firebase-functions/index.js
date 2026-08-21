@@ -14,12 +14,12 @@ const db = admin.firestore();
 const bucket = admin.storage().bucket();
 
 const CONFIG = {
-  companyId: process.env.COMPANY_ID || "han-dienstleister",
-  companyName: "HAN Dienstleister GmbH",
-  domain: process.env.PUBLIC_DOMAIN || "https://han-dienstleister.de",
-  mailFrom: process.env.MAIL_FROM || "HAN Dienstleister <no-reply@han-dienstleister.de>",
-  adminEmail: process.env.ADMIN_EMAIL || "info@han-dienstleister.de",
-  superAdminEmail: process.env.SUPER_ADMIN_EMAIL || "admin@han-dienstleister.de"
+  companyId: process.env.COMPANY_ID || "apex-dienstleister",
+  companyName: "Apex Dienstleister GmbH",
+  domain: process.env.PUBLIC_DOMAIN || "https://apex-dienstleister-demo.de",
+  mailFrom: process.env.MAIL_FROM || "Apex Dienstleister <no-reply@apex-dienstleister-demo.de>",
+  adminEmail: process.env.ADMIN_EMAIL || "info@apex-dienstleister.de",
+  superAdminEmail: process.env.SUPER_ADMIN_EMAIL || "admin@apex-dienstleister.de"
 };
 
 const CONTACT_STATUSES = new Set(["new", "open", "in_progress", "waiting_customer", "accepted", "rejected", "done", "archived"]);
@@ -186,9 +186,9 @@ exports.confirmAppointment = onCall({ region: "europe-west3", secrets: [resendAp
 
   await sendMail({
     to: contact.email,
-    subject: "Ihr Termin mit HAN Dienstleister GmbH",
+    subject: `Ihr Termin mit ${CONFIG.companyName}`,
     html: appointmentCustomerHtml(contact, appointment),
-    attachments: [{ filename: "termin-han-dienstleister.ics", content: Buffer.from(ics).toString("base64") }]
+    attachments: [{ filename: "termin-apex-dienstleister.ics", content: Buffer.from(ics).toString("base64") }]
   });
 
   return {
@@ -283,7 +283,7 @@ async function uploadPublicImage(path, file) {
 async function sendContactEmails(id, payload) {
   await sendMail({
     to: payload.email,
-    subject: "Ihre Anfrage bei HAN Dienstleister GmbH",
+    subject: `Ihre Anfrage bei ${CONFIG.companyName}`,
     html: customerConfirmationHtml(payload)
   });
   await sendAdminMail(`Neue Anfrage: ${payload.service}`, adminContactHtml(id, payload));
@@ -344,7 +344,7 @@ function appointmentCustomerHtml(contact, appointment) {
   const start = `${appointment.date} ${appointment.time}`;
   return emailShell("Ihr Termin wurde bestätigt", `
     <p>Hallo ${escapeHtml(contact.name)},</p>
-    <p>Ihr Termin mit der HAN Dienstleister GmbH wurde bestätigt.</p>
+    <p>Ihr Termin mit der ${CONFIG.companyName} wurde bestätigt.</p>
     <table role="presentation" style="width:100%;border-collapse:collapse;margin:20px 0">
       <tr><td style="padding:8px;border-bottom:1px solid #e5e7eb"><strong>Datum und Uhrzeit</strong></td><td style="padding:8px;border-bottom:1px solid #e5e7eb">${escapeHtml(start)}</td></tr>
       <tr><td style="padding:8px;border-bottom:1px solid #e5e7eb"><strong>Dauer</strong></td><td style="padding:8px;border-bottom:1px solid #e5e7eb">${appointment.durationMinutes} Minuten</td></tr>
@@ -361,12 +361,12 @@ function emailShell(title, body) {
     <div style="margin:0;padding:0;background:#f5f7fa;font-family:Arial,sans-serif;color:#2C3E50">
       <div style="max-width:640px;margin:0 auto;padding:28px">
         <div style="background:#0F2B46;color:#fff;padding:22px 26px;border-radius:10px 10px 0 0">
-          <strong style="font-size:18px">HAN Dienstleister GmbH</strong>
+          <strong style="font-size:18px">${CONFIG.companyName}</strong>
         </div>
         <div style="background:#fff;padding:28px;border:1px solid #DFE4EA;border-top:0;border-radius:0 0 10px 10px">
           <h1 style="margin:0 0 18px;color:#0F2B46;font-size:24px">${escapeHtml(title)}</h1>
           ${body}
-          <p style="margin-top:26px;color:#5A6B7D;font-size:14px">HAN Dienstleister GmbH<br>Am Dreschplatz 8, 67136 Fußgönnheim<br><a href="mailto:info@han-dienstleister.de">info@han-dienstleister.de</a></p>
+          <p style="margin-top:26px;color:#5A6B7D;font-size:14px">${CONFIG.companyName}<br>Gewerbepark Nord 12, 68169 Mannheim<br><a href="mailto:${CONFIG.adminEmail}">${CONFIG.adminEmail}</a></p>
         </div>
       </div>
     </div>`;
@@ -375,11 +375,11 @@ function emailShell(title, body) {
 function buildIcs(contact, appointment) {
   const start = new Date(`${appointment.date}T${appointment.time}:00`);
   const end = new Date(start.getTime() + appointment.durationMinutes * 60000);
-  const uid = `${crypto.randomUUID()}@han-dienstleister.de`;
+  const uid = `${crypto.randomUUID()}@apex-dienstleister-demo.de`;
   return [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//HAN Dienstleister GmbH//Appointment//DE",
+    "PRODID:-//Apex Dienstleister GmbH//Appointment//DE",
     "CALSCALE:GREGORIAN",
     "METHOD:REQUEST",
     "BEGIN:VEVENT",

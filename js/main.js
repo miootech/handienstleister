@@ -1,5 +1,5 @@
 /* ========================================
-   HAN Dienstleister GmbH - Main JavaScript
+   Apex Dienstleister GmbH - Main JavaScript
    ======================================== */
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -250,12 +250,12 @@ function animateCounter(counter) {
 
 function initCookieConsent() {
   const banner = document.querySelector(".cookie-banner");
-  if (!banner || localStorage.getItem("han_cookie_consent")) return;
+  if (!banner || localStorage.getItem("apex_cookie_consent")) return;
 
   banner.hidden = false;
   banner.querySelectorAll("[data-cookie-choice]").forEach((button) => {
     button.addEventListener("click", () => {
-      localStorage.setItem("han_cookie_consent", button.dataset.cookieChoice);
+      localStorage.setItem("apex_cookie_consent", button.dataset.cookieChoice);
       banner.hidden = true;
       window.dispatchEvent(new CustomEvent("cookie-consent-updated", { detail: button.dataset.cookieChoice }));
     });
@@ -276,11 +276,11 @@ function initExternalEmbeds() {
     iframe.allowFullscreen = true;
     iframe.loading = "lazy";
     iframe.referrerPolicy = "no-referrer-when-downgrade";
-    iframe.title = "Standort der HAN Dienstleister GmbH";
+    iframe.title = "Standort der Apex Dienstleister GmbH";
     embed.replaceChildren(iframe);
   };
 
-  if (localStorage.getItem("han_cookie_consent") === "all") {
+  if (localStorage.getItem("apex_cookie_consent") === "all") {
     embeds.forEach(loadEmbed);
   }
 

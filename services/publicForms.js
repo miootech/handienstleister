@@ -84,7 +84,7 @@ function initContactForm() {
     }
 
     if (!isValid) return;
-    if (!enforceLocalRateLimit("han_contact_attempts", appConfig.maxContactMessagesPerHour, CONTACT_RATE_WINDOW)) {
+    if (!enforceLocalRateLimit("apex_contact_attempts", appConfig.maxContactMessagesPerHour, CONTACT_RATE_WINDOW)) {
       showFormStatus(form, "Bitte warten Sie kurz, bevor Sie eine weitere Anfrage senden.", "error");
       return;
     }
@@ -139,7 +139,7 @@ function initReviewForm() {
     }
 
     if (!isValid) return;
-    if (!enforceLocalRateLimit("han_review_attempts", appConfig.maxReviewSubmissionsPerDay, REVIEW_RATE_WINDOW)) {
+    if (!enforceLocalRateLimit("apex_review_attempts", appConfig.maxReviewSubmissionsPerDay, REVIEW_RATE_WINDOW)) {
       showFormStatus(form, "Bitte warten Sie, bevor Sie eine weitere Bewertung senden.", "error");
       return;
     }

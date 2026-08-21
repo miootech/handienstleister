@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 50" width="240" height="50">
+  <defs>
+    <linearGradient id="apexGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B4B7A"/>
+      <stop offset="100%" stop-color="#0F2B46"/>
+    </linearGradient>
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FF9A3C"/>
+      <stop offset="100%" stop-color="#E8740C"/>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="5" width="40" height="40" rx="10" fill="url(#apexGrad)"/>
+  <path d="M12 36L22 14L32 36H26.5L22 25.5L17.5 36H12Z" fill="#FFFFFF"/>
+  <path d="M19 28.5H25L22 21.5L19 28.5Z" fill="url(#accentGrad)"/>
+  <text x="52" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="800" fill="#0F2B46" letter-spacing="-0.5">APEX</text>
+  <text x="109" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="700" fill="#E8740C">GmbH</text>
+  <text x="53" y="41" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="10.5" font-weight="600" fill="#5A6B7D" letter-spacing="1.2">DIENSTLEISTER</text>
+</svg>
